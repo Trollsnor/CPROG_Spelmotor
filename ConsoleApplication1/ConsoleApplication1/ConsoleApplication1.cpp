@@ -6,7 +6,9 @@
 #include "Character.h"
 #include "Session.h"
 #include "Button.h"
+#include "Sprite.h"
 #include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -51,9 +53,22 @@ int main(int argc, char* argv[])
 	//Later, add gameloop and render handling to session: Session::run() Using:
 	//Session* s = new Session();
 
+	//create sprite test
+	// init spritesheet
+	SDL_Surface* sprite = IMG_Load("C:/Users/Gabelstapler/Documents/adventurer-run3-sword-Sheet.png");
+	SDL_Texture* spriteTex = SDL_CreateTextureFromSurface(sys->getRenderer(), sprite);
+	Sprite* spek = new Sprite(sys->getRenderer(), sprite);
 
 	bool runOn = true;
 	while (runOn) {
+
+
+		Uint32 ticks = SDL_GetTicks();
+
+		int spriteU = (ticks / 100) % 6;
+
+		SDL_Rect srcrect = { spriteU * 50, 0, 50, 37 };
+
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
@@ -82,11 +97,15 @@ int main(int argc, char* argv[])
 			SDL_RenderClear(sys->getRenderer());
 			SDL_RenderCopy(sys->getRenderer(), texture, 0, 0);
 			for (Character* c : cArr) {
+				SDL_SetRenderDrawColor(sys->getRenderer(), 100,100,100,255);
 				SDL_RenderFillRect(sys->getRenderer(), c->getRect());
 			}
+
+			SDL_RenderCopy(sys->getRenderer(), spek->texture, spek->getFrame(spriteU), cArr[0]->getRect());
+
 			SDL_RenderPresent(sys->getRenderer());
 
-			SDL_Delay(100); // keep loop speed low bro
+			
 		}
 
 
