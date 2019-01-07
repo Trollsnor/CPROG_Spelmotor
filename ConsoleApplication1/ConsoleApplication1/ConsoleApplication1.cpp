@@ -13,23 +13,27 @@
 #include <string>
 using namespace std;
 
+//SAKER SOM BEHÖVER NÅS FRÅN HELA FILEN:
 Character* cArr[5]{NULL, NULL, NULL, NULL, NULL};
+System* sys;
+SDL_Surface* surface;
+SDL_Texture* t;
 
 Character* createCharacter() {
 	cout << "what is your name? ";
 	string name;
 	cin >> name;
-	Character* player = new Character(name, 10, 20);
+	Character* player = new Character(name, 10, 20, t);
 	cout << "Successfully created Player" << endl;
 	return player;
 }
 
 void initEnemies() {
-	//create enemies:
-	Character* c1 = new Character("Thrall", 200, 50);
-	Character* c2 = new Character("Shyman", 10, 300);
-	Character* c3 = new Character("SVT", 350, 150);
-	Character* c4 = new Character("Läggdax", 150, 75);
+	//create enemies: 
+	Character* c1 = new Character("Thrall", 200, 50, t);
+	Character* c2 = new Character("Shyman", 10, 300, t);
+	Character* c3 = new Character("SVT", 350, 150, t);
+	Character* c4 = new Character("Läggdax", 150, 75, t);
 
 	//add pointers of them to array:
 	cArr[1] = c1;
@@ -41,10 +45,16 @@ void initEnemies() {
 int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	System* sys = new System(); // init system (window and renderer)
-	SDL_Surface* surface = IMG_Load("f2.png");
+	sys = new System(); // init system (window and renderer)
+
+	//creating background texture
+	surface = IMG_Load("f2.png");
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(sys->getRenderer(), surface);
 	SDL_FreeSurface(surface);
+
+	//creating texture for character sprites
+	SDL_Surface* sprite = IMG_Load("adventurer-run3-sword-Sheet.png");
+	t = SDL_CreateTextureFromSurface(sys->getRenderer(), sprite);
 
 	//start game stuffs
     cout << "Hello World!\n" << "Create your character here:" << endl; 
@@ -53,11 +63,14 @@ int main(int argc, char* argv[])
 	//Later, add gameloop and render handling to session: Session::run() Using:
 	//Session* s = new Session();
 
+	/*
 	//create sprite test
 	// init spritesheet
 	SDL_Surface* sprite = IMG_Load("adventurer-run3-sword-Sheet.png");
 	SDL_Texture* spriteTex = SDL_CreateTextureFromSurface(sys->getRenderer(), sprite);
-	Sprite* spek = new Sprite(sys->getRenderer(), sprite);
+	//Sprite* spek = new Sprite(sys->getRenderer(), sprite);
+	*/
+
 
 	bool runOn = true;
 	while (runOn) {
@@ -65,9 +78,9 @@ int main(int argc, char* argv[])
 
 		Uint32 ticks = SDL_GetTicks();
 
-		int spriteU = (ticks / 100) % 6;
+		int spriteUpdate = (ticks / 100) % 6;
 
-		SDL_Rect srcrect = { spriteU * 50, 0, 50, 37 };
+		SDL_Rect srcrect = { spriteUpdate * 50, 0, 50, 37 };
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
@@ -95,13 +108,19 @@ int main(int argc, char* argv[])
 
 			//clear screen and render updated graphics
 			SDL_RenderClear(sys->getRenderer());
-			SDL_RenderCopy(sys->getRenderer(), texture, 0, 0);
+			SDL_RenderCopy(sys->getRenderer(), texture, 0, 0); // background!!!
+			//render all characters sprites. Later also call movement and (possible)behaviour tickUpdate 
+			for (Character* c : cArr) {
+				c->draw(sys->getRenderer(), spriteUpdate);
+			}
+			/*
 			for (Character* c : cArr) {
 				SDL_SetRenderDrawColor(sys->getRenderer(), 100,100,100,255);
 				SDL_RenderFillRect(sys->getRenderer(), c->getRect());
 			}
 
 			SDL_RenderCopy(sys->getRenderer(), spek->texture, spek->getFrame(spriteU), cArr[0]->getRect());
+			*/
 
 			SDL_RenderPresent(sys->getRenderer());
 
