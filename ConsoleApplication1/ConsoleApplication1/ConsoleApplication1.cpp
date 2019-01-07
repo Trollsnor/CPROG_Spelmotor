@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	System* sys = new System(); // init system (window and renderer)
-	SDL_Surface* surface = SDL_LoadBMP("C:/Users/laron/Desktop/bild.bmp");
+	SDL_Surface* surface = IMG_Load("f2.png");
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(sys->getRenderer(), surface);
 	SDL_FreeSurface(surface);
 
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
 	//create sprite test
 	// init spritesheet
-	SDL_Surface* sprite = IMG_Load("C:/Users/Gabelstapler/Documents/adventurer-run3-sword-Sheet.png");
+	SDL_Surface* sprite = IMG_Load("adventurer-run3-sword-Sheet.png");
 	SDL_Texture* spriteTex = SDL_CreateTextureFromSurface(sys->getRenderer(), sprite);
 	Sprite* spek = new Sprite(sys->getRenderer(), sprite);
 
