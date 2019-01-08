@@ -10,6 +10,7 @@ Character::Character(std::string n, int x, int y, SDL_Texture* t) : Sprite(t)
 	body.y = y;
 	body.w = 15;
 	body.h = 25;
+
 }
 
 

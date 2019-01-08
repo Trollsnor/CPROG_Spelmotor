@@ -12,7 +12,7 @@ public:
 	~Sprite();
 
 private:
-	SDL_Rect srcR; // "frames" part of texture that will be rendered at the moment.
+	SDL_Rect srcR = {50, 0, 50, 37 }; // "frames" part of texture that will be rendered at the moment.
 	int width; // tells instance how wide apart each pic lies from each other in texture.
 	int height; // tells instance the height for ^ purpose. 
 	
