@@ -10,10 +10,10 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+using namespace Engine;
 //Global stuff (for now)
 Character* cArr[5];
-System* sys;
+//System* sys;
 SDL_Surface* surface;
 SDL_Texture* defaultSpriteTexture;
 
@@ -28,23 +28,26 @@ void initEnemies() {
 
 int main(int argc, char* argv[])
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	sys = new System(); // init system (window and renderer)
-	defaultSpriteTexture = SDL_CreateTextureFromSurface(sys->getRenderer(), IMG_Load("adventurer-run3-sword-Sheet.png"));
+	//sys = new System(); // init system (window and renderer)
+	defaultSpriteTexture = SDL_CreateTextureFromSurface(sys.getRenderer(), IMG_Load("adventurer-run3-sword-Sheet.png"));
 	initEnemies(); 
 
 
 
 	//*******************************************************************************//
 	// *********************** CREATE AND ADD TO SESSION   **************************//
-	Session sessan = Session(sys); 
+	//Session sessan = Session(sys); 
+	Session sessan;
 	surface = IMG_Load("f2.png"); 
-	sessan.setBackground(SDL_CreateTextureFromSurface(sys->getRenderer(), surface));
+	sessan.setBackground(SDL_CreateTextureFromSurface(sys.getRenderer(), surface));
+	
 
 	for (int i = 0; i < 5; i++) {
 		sessan.addSpriteObj(cArr[i]);
 	}
 
+	Button* b = new Button(100, 100, "C:/Users/Gabelstapler/Pictures/gammal bild.jpg");
+	sessan.addComponentObj(b);
 
 	Player* p = new Player("Juckis", defaultSpriteTexture);
 	sessan.addSpriteObj(p);
@@ -55,7 +58,7 @@ int main(int argc, char* argv[])
 	//******************************************************************************//
 
 	// End program 
-	sys->~System();
+	//sys->~System();
 	return 0;
 }
 
