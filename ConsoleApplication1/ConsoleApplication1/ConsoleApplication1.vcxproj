@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Marie\Documents\SDL2\SDL2-2.0.9\include;C:\Users\Sofia\Documents\PROGRAMMERING\SDL2_image-devel-2.0.4-VC\SDL2_image-2.0.4\include;C:\Users\Marie\Documents\SDL2_image-2.0.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Sofia\Documents\PROGRAMMERING\SDL2_image-devel-2.0.4-VC\SDL2_image-2.0.4\lib\x86;C:\Users\Marie\Documents\SDL2\SDL2-2.0.9\lib\x86;C:\Users\Marie\Documents\SDL2_image-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Gabelstapler\Documents\SDL2_image-2.0.4\include;C:\Users\Gabelstapler\Documents\SDL2-2.0.9\include;C:\Users\Marie\Documents\SDL2\SDL2-2.0.9\include;C:\Users\Sofia\Documents\PROGRAMMERING\SDL2_image-devel-2.0.4-VC\SDL2_image-2.0.4\include;C:\Users\Marie\Documents\SDL2_image-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Gabelstapler\Documents\SDL2-2.0.9\lib\x86;C:\Users\Sofia\Documents\PROGRAMMERING\SDL2_image-devel-2.0.4-VC\SDL2_image-2.0.4\lib\x86;C:\Users\Marie\Documents\SDL2\SDL2-2.0.9\lib\x86;C:\Users\Marie\Documents\SDL2_image-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -165,6 +165,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Session.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="System.h" />
@@ -180,6 +181,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Session.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="System.cpp" />

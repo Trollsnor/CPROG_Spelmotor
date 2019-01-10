@@ -3,7 +3,8 @@
 #include "Character.h"
 #include "Session.h"
 #include "Button.h"
-#include "Sprite.h"
+//#include "Sprite.h"
+#include "Player.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
@@ -18,10 +19,7 @@ SDL_Texture* defaultSpriteTexture;
 
 void initEnemies() {
 	//create characters for testing: 
-	cout << "what is your name? "; // this is for player controlled character
-	string name;
-	cin >> name;
-	cArr[0] = new Character(name, 10, 20, defaultSpriteTexture);
+	cArr[0] = new Character("halallallaren", 10, 20, defaultSpriteTexture);
 	cArr[1] = new Character("Thrall", 200, 50, defaultSpriteTexture);
 	cArr[2] = new Character("Shyman", 10, 300, defaultSpriteTexture);
 	cArr[3] = new Character("SVT", 350, 150, defaultSpriteTexture);
@@ -42,7 +40,15 @@ int main(int argc, char* argv[])
 	Session sessan = Session(sys); 
 	surface = IMG_Load("f2.png"); 
 	sessan.setBackground(SDL_CreateTextureFromSurface(sys->getRenderer(), surface));
-	sessan.addCharacter(cArr[0], cArr[1], cArr[2], cArr[3], cArr[4]);
+
+	for (int i = 0; i < 5; i++) {
+		sessan.addSpriteObj(cArr[i]);
+	}
+
+
+	Player* p = new Player("Juckis", defaultSpriteTexture);
+	sessan.addSpriteObj(p);
+
 	sessan.run();
 
 	//******************************  END OF  **************************************//

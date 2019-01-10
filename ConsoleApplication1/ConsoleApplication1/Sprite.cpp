@@ -5,10 +5,19 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(SDL_Texture* t)
+Sprite::Sprite(SDL_Texture* t, int x, int y)
 {
 	texture = t;
+
+	body.x = x;
+	body.y = y;
+	body.w = 50;
+	body.h = 50;
 	std::cout << "sprite created";
+}
+
+SDL_Rect* Sprite::getBody() {
+	return &body;
 }
 
 SDL_Rect* Sprite::getFrame(int update)
@@ -18,12 +27,10 @@ SDL_Rect* Sprite::getFrame(int update)
 	return &srcR;
 	
 }
-/*
-void Sprite::draw(SDL_Rect destRect)
-{
-	//SDL_RenderCopy(sys->getRenderer(), spek->texture, spek->getFrame(spriteU), cArr[0]->getRect());
-	SDL_RenderCopy(renderer, texture, getFrame(), destRect);
-} */
+
+void Sprite::draw(SDL_Renderer* ren, int spriteUpdate) {
+	SDL_RenderCopy(ren, texture, getFrame(spriteUpdate), &body);
+}
 
 Sprite::~Sprite()
 {

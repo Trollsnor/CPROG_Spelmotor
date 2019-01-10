@@ -2,42 +2,25 @@
 #include "Character.h"
 
 
-//Because sprite needs to be root class, all sprite specific objs needs to be sent while creating a character, as it cannot be reached otherwise? Fixes/cleanups (renderer+surf issue) to come later
-Character::Character(std::string n, int x, int y, SDL_Texture* t) : Sprite(t)
+Character::Character(std::string n, int x, int y, SDL_Texture* t) : Sprite(t, x, y)
 {
 	name = n;
-	body.x = x;
-	body.y = y;
-	body.w = 15;
-	body.h = 25;
+	min = x - 100;
+	max = x + 150;
 
-}
-
-
-int Character::getStrenght() {
-	return strenght;
-}
-int Character::getHealth() {
-	return health;
 }
 
 void Character::tickUpdate() {
-	//move character (add movement pattern info, collision?) <- later... (OBS: only for non-player controlled Characters)
+	//move character (add movement pattern info, collision?)
 	
-	//more?
+	if (body.x < min) {
+		riktning = 2;
+	}
+	 if (body.x > max) {
+		riktning = -2;
+	}
+	body.x += riktning;
 }
-
-void Character::draw(SDL_Renderer* ren, int spriteUpdate) {
-	SDL_RenderCopy(ren, texture, getFrame(spriteUpdate), &body);
-}
-
-SDL_Rect* Character::getRect(){
-	return &body;
-}
-void Character::damageChar(int dmg) {
-	health -= dmg;
-}
-
 
 Character::~Character()
 {

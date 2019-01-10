@@ -1,6 +1,7 @@
 #pragma once
 #include "System.h"
 #include "Character.h"
+#include <vector>
 
 class Session
 {
@@ -10,11 +11,11 @@ public:
 	void setBackground(SDL_Texture* texture) {
 		backgroundTexture = texture;
 	}
-	void addCharacter(Character* a, Character* b, Character* c, Character* d, Character* e);
+	void addSpriteObj(Sprite* obj);
 	~Session();
 private:
 	System* system;
 	SDL_Texture* backgroundTexture;
-	Character* cArr[5];
+	std::vector<Sprite*> sVector;
 };
 
