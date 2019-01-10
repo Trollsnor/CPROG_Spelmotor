@@ -26,6 +26,10 @@ namespace Engine {
 			while (SDL_PollEvent(&event)) {
 				switch (event.type) {
 				case SDL_QUIT: runOn = false; break;
+				case SDL_MOUSEBUTTONDOWN:
+					for (Component* c : cVector)
+						c->onClick(event);
+					break;
 				case SDL_KEYDOWN:
 					switch (event.key.keysym.sym) {
 					case SDLK_UP:

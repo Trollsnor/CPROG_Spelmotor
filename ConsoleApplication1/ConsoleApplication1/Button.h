@@ -10,8 +10,8 @@ namespace Engine {
 	class Button : public Component
 	{
 	public:
-		Button(int x, int y, std::string path);
-		void onClick();
+		Button(int x, int y, int w, int h, std::string path);
+		void onClick(const SDL_Event& event);
 		//SDL_Rect* getRect();
 		~Button();
 		void draw();

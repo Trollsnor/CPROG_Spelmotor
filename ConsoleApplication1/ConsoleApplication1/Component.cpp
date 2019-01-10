@@ -12,9 +12,10 @@ namespace Engine {
 	Component::~Component()
 	{
 	}
-
+	/*
 	void Component::setWH(int w, int h) {
 		shape.w = w;
 		shape.h = h;
 	}
+	*/
 }

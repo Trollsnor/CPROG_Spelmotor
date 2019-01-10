@@ -3,7 +3,7 @@
 
 
 namespace Engine {
-	Button::Button(int x, int y, std::string path) : Component(x, y, 0, 0)
+	Button::Button(int x, int y, int w, int h, std::string path) : Component(x, y, w, h)
 	{
 		//Button::txt = txt;
 		//init rect according to dimensions.
@@ -16,9 +16,10 @@ namespace Engine {
 		createTexture(path);
 	}
 
-	void Button::onClick() {
-		//SDL_Point p;
-		
+	void Button::onClick(const SDL_Event& event) {
+		SDL_Point p = { event.button.x, event.button.y };
+		if (SDL_PointInRect(&p, getRect()))
+			std::cout << "Clicked";
 	}
 
 	void Button::createTexture(std::string path) {
@@ -28,13 +29,13 @@ namespace Engine {
 		surface = IMG_Load(path.c_str());
 		std::cout << "Creating texture...";
 		texture = SDL_CreateTextureFromSurface(sys.getRenderer(), surface);
-		setWH(50, 30);
+		//setWH(50, 30);
 		std::cout << "Button created";
 	}
 
 	void Button::draw() {
 
-		SDL_RenderCopy(sys.getRenderer(), texture, NULL, &getRect());
+		SDL_RenderCopy(sys.getRenderer(), texture, NULL, getRect());
 	}
 	/*
 	SDL_Rect* Button::getRect() {
