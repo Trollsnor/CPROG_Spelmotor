@@ -2,9 +2,9 @@
 #include "Component.h"
 
 
-Component::Component(int inx, int iny, std::string intxt)
+Component::Component(int x, int y, int w, int h)
 {
-	//do shit
+
 
 }
 
