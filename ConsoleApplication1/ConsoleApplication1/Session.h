@@ -16,6 +16,8 @@ namespace Engine {
 		void setBackground(SDL_Texture* texture) {
 			backgroundTexture = texture;
 		}
+		Player* getPlayer();
+		void detectCollision();
 		void addSpriteObj(Sprite* obj);
 		void addComponentObj(Component* c);
 		std::vector<Sprite*> getVector() {

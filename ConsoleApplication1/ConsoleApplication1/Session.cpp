@@ -44,16 +44,13 @@ namespace Engine {
 				}//switch
 			}//poll event
 
-			for (Sprite* s : sVector) {
-				if (!(s->checkCollision(sVector))) { // returns true if s obj collides w other sprite
-					s->tickUpdate();
-				}
-			}
+			detectCollision();
 
 			//RENDER UPDATES
 			SDL_RenderClear(sys.getRenderer());
 			SDL_RenderCopy(sys.getRenderer(), backgroundTexture, 0, 0); 
-			for (Sprite* s : sVector) {                               
+			for (Sprite* s : sVector) {
+				s->tickUpdate();
 				s->draw(spriteUpdate);
 			}
 			for (Component* c : cVector) {                       
@@ -69,42 +66,50 @@ namespace Engine {
 		}
 	}
 
-	void Session::handeKeyEvent(SDL_Event event) {
+	void Session::detectCollision() {
+		for (Sprite* s : sVector) {
+			if (s->checkCollision(sVector)) { // returns true if s obj collides w other sprite
 
+				if (dynamic_cast<Character*>(s) != nullptr) {
+					Character* c = dynamic_cast<Character*>(s);
+					c->flipDirection();
+				}
+				/*
+				else { // this means c is player
+					std::cout << "player collide PLAYER";
+					sVector.
+					return;
+				}
+				*/
+			}
+		}
+	}
+
+	Player* Session::getPlayer() {
+		for (Sprite* c : sVector) {
+			if (dynamic_cast<Player*>(c) != nullptr) {
+				return dynamic_cast<Player*>(c);
+			}
+		}
+	}
+
+	void Session::handeKeyEvent(SDL_Event event) {
 		switch (event.key.keysym.sym) {
 		case SDLK_UP:
-			for (Sprite* c : sVector) {
-				if (dynamic_cast<Player*>(c) != nullptr) {
-					c->move(0, -5);
-				}
-			}
+			getPlayer()->move(0, -5);
 			break;
 		case SDLK_DOWN:
-			for (Sprite* c : sVector) {
-				if (dynamic_cast<Player*>(c) != nullptr) {
-					c->move(0, 5);
-				}
-			}
+			getPlayer()->move(0, 5);
 			break;
 		case SDLK_RIGHT:
-			for (Sprite* c : sVector) {
-				if (dynamic_cast<Player*>(c) != nullptr) {
-					c->move(5, 0);
-				}
-			}
+			getPlayer()->move(5, 0);
 			break;
 		case SDLK_LEFT:
-			for (Sprite* c : sVector) {
-				if (dynamic_cast<Player*>(c) != nullptr) {
-					c->move(-5, 0);
-				}
-			}
+			getPlayer()->move(-5, 0);
 			break;
 		case SDLK_n:  break;
 		} // keydown switch
 	}
-
-
 
 	Session::~Session()
 	{

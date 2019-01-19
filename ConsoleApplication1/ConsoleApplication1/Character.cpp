@@ -5,19 +5,32 @@ namespace Engine {
 	Character::Character(std::string n, int x, int y, SDL_Texture* t) : Sprite(t, x, y)
 	{
 		name = n;
-		min = x - 100;
-		max = x + 150;
+		min = 0;
+		max = 550;
 
+	}
+	void Character::flipDirection() {
+		if (riktning == 2) {
+			riktning = -2;
+			std::cout << "flipped to left";
+		}
+
+		else if (riktning == -2) {
+			riktning = 2;
+			std::cout << "flipped to right";
+		}
+		std::cout << "flipped";
 	}
 
 	void Character::tickUpdate() {
 		//move character (add movement pattern info, collision?)
 
 		if (body.x < min) {
-			riktning = 2;
+			flipDirection();
 		}
 		if (body.x > max) {
-			riktning = -2;
+			flipDirection();
+			
 		}
 		body.x += riktning;
 		/*

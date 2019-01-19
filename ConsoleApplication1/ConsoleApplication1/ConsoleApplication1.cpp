@@ -19,8 +19,8 @@ SDL_Texture* defaultSpriteTexture;
 
 void initEnemies() {
 	//create characters for testing: 
-	cArr[0] = new Character("halallallaren", 10, 20, defaultSpriteTexture);
-	cArr[1] = new Character("Thrall", 200, 50, defaultSpriteTexture);
+	cArr[0] = new Character("halallallaren", 10, 150, defaultSpriteTexture);
+	cArr[1] = new Character("Thrall", 200, 150, defaultSpriteTexture);
 	cArr[2] = new Character("Shyman", 10, 300, defaultSpriteTexture);
 	cArr[3] = new Character("SVT", 350, 150, defaultSpriteTexture);
 	cArr[4] = new Character("Läggdax", 110, 75, defaultSpriteTexture);

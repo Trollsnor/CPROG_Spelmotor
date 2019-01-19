@@ -22,8 +22,8 @@ namespace Engine {
 
 	SDL_Rect* Sprite::getFrame(int update)
 	{
-		//return srcrect from spritesheet texture
-		srcR = { update * 50, 0, 50, 37 }; // will later be changed according to width and height, when class holds more than 1 possible texture
+		//return srcrect from spritesheet texture 50, 0, 50, 37
+		srcR = { update * 50, 10, 45, 35 }; // will later be changed according to width and height, when class holds more than 1 possible texture
 		return &srcR;
 
 	}
