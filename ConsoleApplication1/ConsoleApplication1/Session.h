@@ -14,13 +14,13 @@ namespace Engine {
 			backgroundTexture = texture;
 		}
 		void addSpriteObj(Sprite* obj);
-		void addComponentObj(Component* c);
+		//void addComponentObj(Component* c);
 		~Session();
 	private:
 		//System* system;
 		SDL_Texture* backgroundTexture;
 		std::vector<Sprite*> sVector;
-		std::vector<Component*> cVector;
+		//std::vector<Component*> cVector;
 	};
 
 }

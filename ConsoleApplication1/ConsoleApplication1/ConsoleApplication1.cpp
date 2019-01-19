@@ -46,8 +46,10 @@ int main(int argc, char* argv[])
 		sessan.addSpriteObj(cArr[i]);
 	}
 
+	/*
 	Button* b = new Button(10, 5, 100, 60, "C:/Users/Gabelstapler/Pictures/gammal bild.jpg");
 	sessan.addComponentObj(b);
+	*/
 
 	Player* p = new Player("Juckis", defaultSpriteTexture);
 	sessan.addSpriteObj(p);

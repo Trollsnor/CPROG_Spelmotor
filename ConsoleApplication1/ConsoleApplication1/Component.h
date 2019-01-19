@@ -2,8 +2,9 @@
 
 #include <string>
 #include <SDL.h>
-#include "Session.h"
-#include "Character.h"
+//#include "Session.h"
+//#include "Character.h"
+
 
 namespace Engine {
 	class Component
@@ -28,5 +29,6 @@ namespace Engine {
 		//std::string txt;
 		SDL_Rect shape;
 	};
+	
 
 }

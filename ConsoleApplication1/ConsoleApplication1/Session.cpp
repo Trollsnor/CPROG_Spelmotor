@@ -10,10 +10,10 @@ namespace Engine {
 	void Session::addSpriteObj(Sprite* obj) { // change to take Sprite obj as parameter, using dynamic cast when calling function(?)
 		sVector.push_back(obj);
 	}
-
+	/*
 	void Session::addComponentObj(Component* c) {
 		cVector.push_back(c);
-	}
+	}*/
 
 	void Session::run() {
 
@@ -27,8 +27,10 @@ namespace Engine {
 				switch (event.type) {
 				case SDL_QUIT: runOn = false; break;
 				case SDL_MOUSEBUTTONDOWN:
+					/*
 					for (Component* c : cVector)
 						c->onClick(event);
+					*/
 					break;
 				case SDL_KEYDOWN:
 					switch (event.key.keysym.sym) {
@@ -59,10 +61,12 @@ namespace Engine {
 					s->tickUpdate();
 					s->draw(spriteUpdate);
 				}
+				/*
 				//render all components in vector:
 				for (Component* c : cVector)
 					c->draw();
 
+				*/
 				SDL_RenderPresent(sys.getRenderer());
 			} // poll event - while
 		} // runOn Gameloop

@@ -7,7 +7,7 @@
 
 
 namespace Engine {
-	class Button : public Component
+	class Button :  Component
 	{
 	public:
 		Button(int x, int y, int w, int h, std::string path);

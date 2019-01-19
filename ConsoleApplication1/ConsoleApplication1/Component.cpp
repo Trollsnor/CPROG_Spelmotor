@@ -8,7 +8,6 @@ namespace Engine {
 
 	}
 
-
 	Component::~Component()
 	{
 	}
