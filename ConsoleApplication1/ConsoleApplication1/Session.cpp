@@ -39,16 +39,21 @@ namespace Engine {
 					}
 					break;
 				case SDL_KEYDOWN:
-					handeKeyEvent(event);                  //handling player key actions
+					handeKeyEvent(event);          //handling player key actions
 					break;
 				}//switch
 			}//poll event
+
+			for (Sprite* s : sVector) {
+				if (!(s->checkCollision(sVector))) { // returns true if s obj collides w other sprite
+					s->tickUpdate();
+				}
+			}
 
 			//RENDER UPDATES
 			SDL_RenderClear(sys.getRenderer());
 			SDL_RenderCopy(sys.getRenderer(), backgroundTexture, 0, 0); 
 			for (Sprite* s : sVector) {                               
-				s->tickUpdate();
 				s->draw(spriteUpdate);
 			}
 			for (Component* c : cVector) {                       
@@ -65,6 +70,7 @@ namespace Engine {
 	}
 
 	void Session::handeKeyEvent(SDL_Event event) {
+
 		switch (event.key.keysym.sym) {
 		case SDLK_UP:
 			for (Sprite* c : sVector) {

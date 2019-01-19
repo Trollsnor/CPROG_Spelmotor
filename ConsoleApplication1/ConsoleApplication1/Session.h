@@ -18,6 +18,9 @@ namespace Engine {
 		}
 		void addSpriteObj(Sprite* obj);
 		void addComponentObj(Component* c);
+		std::vector<Sprite*> getVector() {
+			return sVector;
+		}
 		~Session();
 	private:
 		//System* system;

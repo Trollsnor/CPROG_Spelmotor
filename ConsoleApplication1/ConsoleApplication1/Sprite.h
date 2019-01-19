@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <string>
+#include <vector>
 #include "System.h"
 
 namespace Engine {
@@ -12,6 +13,7 @@ namespace Engine {
 		SDL_Rect* getFrame(int update);
 		SDL_Rect* getBody();
 		void draw(int spriteUpdate);
+		bool checkCollision(std::vector<Sprite*>);
 		virtual void tickUpdate() {} // just for character objs
 		virtual void move(int xRiktning, int yRiktning) {}       // just for Player objs
 		Sprite(const Sprite&) = delete;

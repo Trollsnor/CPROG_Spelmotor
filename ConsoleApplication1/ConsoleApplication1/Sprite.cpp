@@ -30,7 +30,23 @@ namespace Engine {
 
 	void Sprite::draw(int spriteUpdate) {
 		SDL_RenderCopy(sys.getRenderer(), texture, getFrame(spriteUpdate), &body);
+
 	}
+
+	
+	bool Sprite::checkCollision(std::vector<Sprite*> sVector) {
+		for (Sprite* s2 : sVector) {
+			if (!(getBody() == s2->getBody())) {      // check that its not collidion with itself.
+				bool collision = SDL_HasIntersection(getBody(), s2->getBody());
+				if (collision) {
+					std::cout << "collision detected" << std::endl;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 
 	Sprite::~Sprite()
 	{

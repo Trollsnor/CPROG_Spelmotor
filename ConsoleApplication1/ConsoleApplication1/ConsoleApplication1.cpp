@@ -23,7 +23,7 @@ void initEnemies() {
 	cArr[1] = new Character("Thrall", 200, 50, defaultSpriteTexture);
 	cArr[2] = new Character("Shyman", 10, 300, defaultSpriteTexture);
 	cArr[3] = new Character("SVT", 350, 150, defaultSpriteTexture);
-	cArr[4] = new Character("Läggdax", 150, 75, defaultSpriteTexture);
+	cArr[4] = new Character("Läggdax", 110, 75, defaultSpriteTexture);
 }
 
 int main(int argc, char* argv[])

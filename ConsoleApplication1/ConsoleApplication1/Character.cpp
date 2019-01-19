@@ -20,6 +20,11 @@ namespace Engine {
 			riktning = -2;
 		}
 		body.x += riktning;
+		/*
+		//now, after moving rect, but before drawing: check if collision
+		checkCollision();
+		*/
+
 	}
 
 	Character::~Character()
