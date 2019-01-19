@@ -7,6 +7,7 @@ namespace Engine {
 	{
 	public:
 		Player(std::string name, SDL_Texture* tex);
+		void move(int xRiktning, int yRiktning);
 		~Player();
 
 	private:

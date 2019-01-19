@@ -54,8 +54,8 @@ int main(int argc, char* argv[])
 	Player* p = new Player("Juckis", defaultSpriteTexture);
 	sessan.addSpriteObj(p);
 
-	sessan.run();
-
+	//sessan.run();
+	sessan.run(60);
 	//******************************  END OF  **************************************//
 	//******************************************************************************//
 

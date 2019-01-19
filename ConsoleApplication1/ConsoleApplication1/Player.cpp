@@ -8,6 +8,9 @@ namespace Engine {
 
 	}
 
+	void Player::move(int xRiktning, int yRiktning) {
+		body = { (body.x += xRiktning), (body.y += yRiktning), 50, 50 };
+	}
 
 
 

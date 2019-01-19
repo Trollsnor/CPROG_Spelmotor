@@ -12,7 +12,8 @@ namespace Engine {
 		SDL_Rect* getFrame(int update);
 		SDL_Rect* getBody();
 		void draw(int spriteUpdate);
-		virtual void tickUpdate() {} // just for character obj:S
+		virtual void tickUpdate() {} // just for character objs
+		virtual void move(int xRiktning, int yRiktning) {}       // just for Player objs
 		Sprite(const Sprite&) = delete;
 		const Sprite& operator=(const Sprite&) = delete;
 		virtual ~Sprite();

@@ -17,16 +17,9 @@ namespace Engine {
 		SDL_Rect* getRect() {
 			return &shape;
 		}
-		//void setWH(int w, int h);
 
 	private:
-		/*
-		int x;
-		int y;
-		int w;
-		int h;
-		*/
-		//std::string txt;
+		
 		SDL_Rect shape;
 	};
 	

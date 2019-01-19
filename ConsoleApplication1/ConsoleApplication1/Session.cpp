@@ -4,74 +4,101 @@
 namespace Engine {
 	Session::Session()
 	{
-		//system = sys;
+		
 	}
 
 	void Session::addSpriteObj(Sprite* obj) { // change to take Sprite obj as parameter, using dynamic cast when calling function(?)
 		sVector.push_back(obj);
 	}
-	/*
+	
 	void Session::addComponentObj(Component* c) {
 		cVector.push_back(c);
-	}*/
+	}
+	
+	void Session::run(const int fps) {
 
-	void Session::run() {
+		//SETTING VARIABLES FOR LOOP <3
+		const int FPS = fps;                          //Set fps when calling run
+		const int frameDelay = 1000 / FPS;            //Decides how long each frame should last in millisec
+		Uint32 frameStart;                            //Counts time in millisec to decide frametime
+		int frameTime;                                //Tells the actual time it took for the gameloop to go one "lap"
+		bool gameOn = true;
 
-		bool runOn = true;
-		while (runOn) {
+		while (gameOn) {
+			frameStart = SDL_GetTicks();
+			int spriteUpdate = (frameStart / 100) % 6;     //For our standard sprite 
 
-			Uint32 ticks = SDL_GetTicks();
-			int spriteUpdate = (ticks / 100) % 6;
+			//DETECT GAME CHANGES HERE
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) {
 				switch (event.type) {
-				case SDL_QUIT: runOn = false; break;
+				case SDL_QUIT: gameOn = false; break;
 				case SDL_MOUSEBUTTONDOWN:
-					/*
-					for (Component* c : cVector)
+					for (Component* c : cVector) {
 						c->onClick(event);
-					*/
+					}
 					break;
 				case SDL_KEYDOWN:
-					switch (event.key.keysym.sym) {
-					case SDLK_UP:
-						sVector.at(0)->getBody()->y -= 5;
-						break;
-					case SDLK_DOWN:
-						sVector.at(0)->getBody()->y += 5;
-						break;
-					case SDLK_RIGHT:
-						sVector.at(0)->getBody()->x += 5;
-						break;
-					case SDLK_LEFT:
-						sVector.at(0)->getBody()->x -= 5;
-						break;
-					case SDLK_n:  break;
-					} // inre switch
+					handeKeyEvent(event);                  //handling player key actions
 					break;
 				}//switch
+			}//poll event
 
-				//clear screen and render updated graphics
-				SDL_RenderClear(sys.getRenderer());
-				SDL_RenderCopy(sys.getRenderer(), backgroundTexture, 0, 0); // background!!!
+			//RENDER UPDATES
+			SDL_RenderClear(sys.getRenderer());
+			SDL_RenderCopy(sys.getRenderer(), backgroundTexture, 0, 0); 
+			for (Sprite* s : sVector) {                               
+				s->tickUpdate();
+				s->draw(spriteUpdate);
+			}
+			for (Component* c : cVector) {                       
+				c->draw();
+			}
+			SDL_RenderPresent(sys.getRenderer());
 
-
-				//render all oj:s in vector:
-				for (Sprite* s : sVector) {
-					s->tickUpdate();
-					s->draw(spriteUpdate);
-				}
-				/*
-				//render all components in vector:
-				for (Component* c : cVector)
-					c->draw();
-
-				*/
-				SDL_RenderPresent(sys.getRenderer());
-			} // poll event - while
-		} // runOn Gameloop
-
+			//CONTROL FRAMERATE
+			frameTime = SDL_GetTicks() - frameStart;   // how long a frame has taken, in millisec
+			if (frameDelay > frameTime) {              //check if frameDelay is more that the timne frame actually took. In that case; delay.
+				SDL_Delay(frameDelay-frameTime);
+			}
+		}
 	}
+
+	void Session::handeKeyEvent(SDL_Event event) {
+		switch (event.key.keysym.sym) {
+		case SDLK_UP:
+			for (Sprite* c : sVector) {
+				if (dynamic_cast<Player*>(c) != nullptr) {
+					c->move(0, -5);
+				}
+			}
+			break;
+		case SDLK_DOWN:
+			for (Sprite* c : sVector) {
+				if (dynamic_cast<Player*>(c) != nullptr) {
+					c->move(0, 5);
+				}
+			}
+			break;
+		case SDLK_RIGHT:
+			for (Sprite* c : sVector) {
+				if (dynamic_cast<Player*>(c) != nullptr) {
+					c->move(5, 0);
+				}
+			}
+			break;
+		case SDLK_LEFT:
+			for (Sprite* c : sVector) {
+				if (dynamic_cast<Player*>(c) != nullptr) {
+					c->move(-5, 0);
+				}
+			}
+			break;
+		case SDLK_n:  break;
+		} // keydown switch
+	}
+
+
 
 	Session::~Session()
 	{
