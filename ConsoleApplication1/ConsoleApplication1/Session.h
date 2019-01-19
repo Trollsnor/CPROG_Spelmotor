@@ -17,6 +17,7 @@ namespace Engine {
 			backgroundTexture = texture;
 		}
 		Player* getPlayer();
+		void gameOver();
 		void detectCollision();
 		void addSpriteObj(Sprite* obj);
 		void addComponentObj(Component* c);
@@ -29,7 +30,7 @@ namespace Engine {
 		SDL_Texture* backgroundTexture;
 		std::vector<Sprite*> sVector;
 		std::vector<Component*> cVector;
-
+		bool gameOn = true;
 	};
 
 }

@@ -6,7 +6,8 @@ namespace Engine {
 		public Sprite
 	{
 	public:
-		Player(std::string name, SDL_Texture* tex);
+		Player(std::string name, std::string p);
+		void draw(int spriteUpdate);
 		void move(int xRiktning, int yRiktning);
 		~Player();
 

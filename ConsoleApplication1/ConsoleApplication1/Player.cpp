@@ -2,7 +2,7 @@
 #include "Player.h"
 
 namespace Engine {
-	Player::Player(std::string name, SDL_Texture* tex) : Sprite(tex, 300, 200)
+	Player::Player(std::string name, std::string p) : Sprite(p, 300, 200)
 	{
 		Player::name = name;
 
@@ -12,7 +12,10 @@ namespace Engine {
 		body = { (body.x += xRiktning), (body.y += yRiktning), 50, 50 };
 	}
 
+	void Player::draw(int spriteUpdate) {
+		SDL_RenderCopy(sys.getRenderer(), getTexture(), getFrame(spriteUpdate), &body);
 
+	}
 
 	Player::~Player()
 	{

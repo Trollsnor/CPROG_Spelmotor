@@ -1,3 +1,5 @@
-﻿  Session.cpp
-c:\users\sofia\documents\github\cprog_spelmotor\consoleapplication1\consoleapplication1\session.cpp(94): warning C4715: 'Engine::Session::getPlayer': not all control paths return a value
-  ConsoleApplication1.vcxproj -> C:\Users\Sofia\Documents\GitHub\CPROG_Spelmotor\ConsoleApplication1\Debug\ConsoleApplication1.exe
+﻿  ConsoleApplication1.cpp
+  Session.cpp
+  Generating Code...
+c:\users\marie\documents\github\cprog_spelmotor\consoleapplication1\consoleapplication1\session.cpp(99): warning C4715: 'Engine::Session::getPlayer': not all control paths return a value
+  ConsoleApplication1.vcxproj -> C:\Users\Marie\Documents\GitHub\CPROG_Spelmotor\ConsoleApplication1\Debug\ConsoleApplication1.exe

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Session.h"
+#include <SDL_image.h>
 
 namespace Engine {
 	Session::Session()
@@ -22,7 +23,7 @@ namespace Engine {
 		const int frameDelay = 1000 / FPS;            //Decides how long each frame should last in millisec
 		Uint32 frameStart;                            //Counts time in millisec to decide frametime
 		int frameTime;                                //Tells the actual time it took for the gameloop to go one "lap"
-		bool gameOn = true;
+		gameOn = true;
 
 		while (gameOn) {
 			frameStart = SDL_GetTicks();
@@ -67,6 +68,7 @@ namespace Engine {
 	}
 
 	void Session::detectCollision() {
+		int i = 0;
 		for (Sprite* s : sVector) {
 			if (s->checkCollision(sVector)) { // returns true if s obj collides w other sprite
 
@@ -74,14 +76,17 @@ namespace Engine {
 					Character* c = dynamic_cast<Character*>(s);
 					c->flipDirection();
 				}
-				/*
+				
 				else { // this means c is player
 					std::cout << "player collide PLAYER";
-					sVector.
+					//sVector.erase(sVector.begin() + i);
+					gameOver();
+					
 					return;
 				}
-				*/
+				
 			}
+			i++;
 		}
 	}
 
@@ -91,6 +96,18 @@ namespace Engine {
 				return dynamic_cast<Player*>(c);
 			}
 		}
+	}
+	
+	void Session::gameOver() {
+		std::cout << "D E A D D D D AFE E GSROGNSOINRGOINS";
+		SDL_Surface* surf = IMG_Load("GameOver.png");
+		SDL_Texture* tex = SDL_CreateTextureFromSurface(sys.getRenderer(), surf);
+		
+		SDL_RenderClear(sys.getRenderer());
+		SDL_RenderCopy(sys.getRenderer(), tex, 0, 0);
+		SDL_RenderPresent(sys.getRenderer());
+		SDL_Delay(2000);
+		gameOn = false;
 	}
 
 	void Session::handeKeyEvent(SDL_Event event) {
@@ -113,5 +130,12 @@ namespace Engine {
 
 	Session::~Session()
 	{
+		for (Sprite* s : sVector) {
+			delete s;
+		}
+
+		for (Component*c : cVector) {
+			delete c;
+		}
 	}
 }

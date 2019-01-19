@@ -5,9 +5,9 @@
 #include "Sprite.h"
 
 namespace Engine {
-	Sprite::Sprite(SDL_Texture* t, int x, int y)
+	Sprite::Sprite(std::string path, int x, int y)
 	{
-		texture = t;
+		createTexture(path);
 
 		body.x = x;
 		body.y = y;
@@ -28,9 +28,15 @@ namespace Engine {
 
 	}
 
-	void Sprite::draw(int spriteUpdate) {
-		SDL_RenderCopy(sys.getRenderer(), texture, getFrame(spriteUpdate), &body);
 
+	void Sprite::createTexture(std::string path) {
+		surface = IMG_Load(path.c_str());
+		texture = SDL_CreateTextureFromSurface(sys.getRenderer(), surface);
+		SDL_FreeSurface(surface);
+	}
+
+	SDL_Texture* Sprite::getTexture() {
+		return texture;
 	}
 
 	

@@ -15,21 +15,21 @@ using namespace Engine;
 Character* cArr[5];
 //System* sys;
 SDL_Surface* surface;
-SDL_Texture* defaultSpriteTexture;
+//SDL_Texture* defaultSpriteTexture;
 
 void initEnemies() {
 	//create characters for testing: 
-	cArr[0] = new Character("halallallaren", 10, 150, defaultSpriteTexture);
-	cArr[1] = new Character("Thrall", 200, 150, defaultSpriteTexture);
-	cArr[2] = new Character("Shyman", 10, 300, defaultSpriteTexture);
-	cArr[3] = new Character("SVT", 350, 150, defaultSpriteTexture);
-	cArr[4] = new Character("Läggdax", 110, 75, defaultSpriteTexture);
+	cArr[0] = new Character("halallallaren", 10, 150, "pixel-art-fire-monster.jpg");
+	cArr[1] = new Character("Thrall", 200, 150, "pixel-art-fire-monster.jpg");
+	cArr[2] = new Character("Shyman", 10, 300, "pixel-art-fire-monster.jpg");
+	cArr[3] = new Character("SVT", 350, 150, "pixel-art-fire-monster.jpg");
+	cArr[4] = new Character("Läggdax", 110, 75, "pixel-art-fire-monster.jpg");
 }
 
 int main(int argc, char* argv[])
 {
 	//sys = new System(); // init system (window and renderer)
-	defaultSpriteTexture = SDL_CreateTextureFromSurface(sys.getRenderer(), IMG_Load("adventurer-run3-sword-Sheet.png"));
+	//defaultSpriteTexture = SDL_CreateTextureFromSurface(sys.getRenderer(), IMG_Load("adventurer-run3-sword-Sheet.png"));
 	initEnemies(); 
 
 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	// *********************** CREATE AND ADD TO SESSION   **************************//
 	//Session sessan = Session(sys); 
 	Session sessan;
-	surface = IMG_Load("f2.png"); 
+	surface = IMG_Load("wall_10.jpg"); 
 	sessan.setBackground(SDL_CreateTextureFromSurface(sys.getRenderer(), surface));
 	
 
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 	sessan.addComponentObj(b);
 	*/
 
-	Player* p = new Player("Juckis", defaultSpriteTexture);
+	Player* p = new Player("Juckis", "adventurer-run3-sword-Sheet.png");
 	sessan.addSpriteObj(p);
 
 	//sessan.run();
@@ -60,7 +60,8 @@ int main(int argc, char* argv[])
 	//******************************************************************************//
 
 	// End program 
-	//sys->~System();
+	sys.~System();
+	sessan.~Session();
 	return 0;
 }
 

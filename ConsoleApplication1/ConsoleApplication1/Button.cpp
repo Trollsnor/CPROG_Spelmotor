@@ -5,14 +5,6 @@
 namespace Engine {
 	Button::Button(int x, int y, int w, int h, std::string path) : Component(x, y, w, h)
 	{
-		//Button::txt = txt;
-		//init rect according to dimensions.
-		//Button::shape = new SDL_Rect();
-		//shape->x = x;
-		//shape->y = y;
-		//shape->w = 200;
-		//shape->h = 75;
-		//createTexture(ren);
 		createTexture(path);
 	}
 

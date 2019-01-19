@@ -2,7 +2,7 @@
 #include "Character.h"
 
 namespace Engine {
-	Character::Character(std::string n, int x, int y, SDL_Texture* t) : Sprite(t, x, y)
+	Character::Character(std::string n, int x, int y, std::string p) : Sprite(p, x, y)
 	{
 		name = n;
 		min = 0;
@@ -38,6 +38,15 @@ namespace Engine {
 		checkCollision();
 		*/
 
+	}
+
+	void Character::draw(int spriteUpdate) {
+		SDL_RenderCopy(sys.getRenderer(), getTexture(), NULL, &body);
+
+	}
+
+	void Character::die() {
+		delete this;
 	}
 
 	Character::~Character()
